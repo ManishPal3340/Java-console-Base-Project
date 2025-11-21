@@ -1,1 +1,164 @@
+ //this project in two page (1 page in user and 2 page in main page)
+=========================================================================
+=================Start code==============================================
+=========================user page code==================================
+
+ package com.example.ATM_Machine;
+
+import java.util.Scanner;
+
+public class user {
+    int accNo;
+    int amt;
+    String name;
+    private  int pinNo=1234,bal=200;
+    Scanner sc =new Scanner(System.in);
+
+// Create a Getter Setter Use
+    public int getPinNo()
+    {
+        return pinNo;
+    }
+
+    public void setPinNo(int pinNo)
+    {
+        this.pinNo = pinNo;
+    }
+
+    public int getBal()
+    {
+        return bal;
+    }
+
+    public void setBal(int bal)
+    {
+        this.bal = bal;
+    }
+
+
+    //create a Display method
+     public void display(){
+         System.out.println("Hello"+name+"\nBalance="+bal);
+     }
+
+     // create the Accept method its means the user enter the details
+    public  void  accept()
+    {
+        System.out.println("Enter your name");
+        name=sc.next();
+        /*System.out.println("Enter your account no");
+        accNo=sc.nextInt();
+        System.out.println("Enter your pin no");
+        pinNo=sc.nextInt();
+        System.out.println("Enter the amount for dep");
+        amt=sc.nextInt();
+        bal+=amt;
+
+         */
+
+
+    }
+
+    public static void main(String []args){
+
+        // create a object in main method  and call the object
+        user u1=new user();
+        u1.accept();
+        u1.display();
+    }
+}
+
+
+
+
+===========================main page code========================
+package com.example.ATM_Machine;
+
+import java.util.Scanner;
+
+public class Bank extends user{
+
+    public static void main(String []args){
+
+        // create a object in main method
+        Bank b1=new Bank();
+
+
+        // check balance
+       // System.out.println(b1.getBal());
+
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("========== Welcome to ATM Machine ======");
+
+
+
+       // ATM_Pin=1234;
+        user user1=new user();
+        user1.accept();
+        System.out.println("1 Enter Pin Number");
+        int ATM_Pin=sc.nextInt();
+
+
+        if (ATM_Pin==b1.getPinNo()) {
+            System.out.println("Welcome "+user1.name);
+
+            System.out.println("1. Check Balance");
+            System.out.println("2. Deposit Amount");
+            System.out.println("3. Withdraw Amount");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+            int choice = sc.nextInt();
+
+            switch (choice) {
+
+                case 1:
+                    // Check balance
+                    System.out.println("Your Current Balance = " + b1.getBal());
+                    break;
+
+                case 2:
+                    // Deposit amount
+                    System.out.print("Enter Deposite Amount: ");
+                    b1.amt = sc.nextInt();
+                    int temp = b1.getBal();
+                    temp += b1.amt;
+                    b1.setBal(temp);
+                    System.out.println("Updated Balance = " + b1.getBal());
+                    break;
+
+                case 3:
+                    // Withdraw amount
+                    System.out.print("Enter Withdraw Amount: ");
+                    b1.amt = sc.nextInt();
+                    if (b1.amt <= b1.getBal()) {
+                        int temp2 = b1.getBal();
+                        temp2 -= b1.amt;
+                        b1.setBal(temp2);
+                        System.out.println("Withdraw Successful!");
+                        System.out.println("Remaining Balance = " + b1.getBal());
+                    } else {
+                        System.out.println("Insufficient Balance!");
+                    }
+                    break;
+
+                case 4:
+                    System.out.println("Thank you for using ATM!");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice! Please try again.");
+            }
+
+        }
+        else {
+
+            System.out.println("Invalid Pin Number Please try again❌");
+        }
+
+        sc.close();
+    }
+}
+
 
